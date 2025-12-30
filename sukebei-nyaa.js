@@ -1,5 +1,4 @@
 import AbstractSource from './abstract.js'
-import { JSDOM } from 'jsdom'
 
 const QUALITIES = ['2160', '1080', '720', '540', '480']
 
@@ -29,8 +28,8 @@ export default new class SukebeiNyaa extends AbstractSource {
   }
 
   parseResults(html) {
-    const dom = new JSDOM(html)
-    const doc = dom.window.document
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(html, 'text/html')
 
     const results = []
     const rows = doc.querySelectorAll('tbody tr')
